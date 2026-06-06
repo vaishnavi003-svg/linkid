@@ -10,7 +10,9 @@ export default async function PlatformRedirect({
 }: {
     params: Promise<PlatformParams>;
 }) {
-    const { username, platform } = await params;
+    const { username: rawUsername, platform } = await params;
+    const username = rawUsername.toLowerCase();
+
     const requestHeaders = await headers();
 
     const resolved = await resolveUserByUsername(username);
